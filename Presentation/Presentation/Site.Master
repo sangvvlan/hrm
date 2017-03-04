@@ -1,0 +1,165 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Presentation.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title><%: Page.Title %> - Quản lý nhân sự</title>
+    <asp:PlaceHolder runat="server">     
+          <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>  
+    <webopt:BundleReference runat="server" Path="~/Content/css" /> 
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+    <style type="text/css">
+      div.menu
+        {
+            padding: 4px 0px 4px 8px;
+        }
+        .lou
+        {
+        border-radius: 10px 10px 10px 10px;
+        -moz-border-radius: 10px 10px 10px 10px;
+        -webkit-border-radius: 10px 10px 10px 10px;
+        border: 1px solid #3300CC; width:100%; 
+
+        }
+        
+    </style>
+</head>
+<body>
+    <form runat="server">
+    <asp:ScriptManager runat="server">
+        <Scripts>
+            <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=272931&clcid=0x409 --%>
+            <%--Framework Scripts--%>
+            
+            <asp:ScriptReference Name="MsAjaxBundle" />
+            <asp:ScriptReference Name="jquery" />
+            <asp:ScriptReference Name="jquery.ui.combined" />
+            <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+            <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+            <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+            <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+            <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+            <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+            <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+            <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+            <asp:ScriptReference Name="WebFormsBundle" />
+            <%--Site Scripts--%>
+
+        </Scripts>
+    </asp:ScriptManager>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">
+                    <img src="../../Picture/hr.png" style="height: 40px; width: 81px" />
+                </p>
+            </div>
+            <div class="float-right">
+                <section id="login">
+                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul>
+                                <li><a id="loginLink" runat="server" href="/nguoidung/dangnhap">Log in</a></li>
+                            </ul>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <p>
+                                Hello, <a runat="server" class="username" href="~/Account/Manage" title="Manage your account">
+                                    <asp:LoginName runat="server" CssClass="username" /></a>!
+                                <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" />
+                            </p>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </section>
+                <nav>
+                 <li>
+                            <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal" RenderingMode="List">
+
+                                <Items>
+                                    <asp:MenuItem Text="Danh mục" Value="DM">
+                                        <asp:MenuItem NavigateUrl="/nguoidung/p" Text="Cập nhật tài khoản" Value="Capnhattaikhoan"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="/dantoc/p" Text="Cập nhật dân tộc" Value="capnhatdmdantoc"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="/loaihopdong/p" Text="Cập nhật loại hợp đồng" Value="capnhatloaihopdong"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="/phongban/p" Text="Cập nhật phòng ban" Value="capnhatphongban"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="/tongia/p" Text="Cập nhật tôn giáo" Value="capnhattongiao"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="/trinhdo/dh" Text="Cập nhật trình độ" Value="capnhattrinhdo"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="/chucvu/cv" Text="Cập nhật chức vụ" Value="capnhatchucvu"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="/gioitinh/nam" Text="Cập nhật giới tính" Value="capnhatgioitinh"></asp:MenuItem>
+                                    </asp:MenuItem>
+                                    <asp:MenuItem Text="Nghiệp vụ" Value="NV">
+                                        <asp:MenuItem NavigateUrl="nghiepvu/nhanvien" Text="Hồ sơ nhân viên" Value="hosonhanvien"></asp:MenuItem>
+                                        <asp:MenuItem Text="Cập nhật hồ sơ BHXH" Value="New Item"></asp:MenuItem>
+                                        <asp:MenuItem Text="Cập nhật thông tin hành chánh" Value="New Item"></asp:MenuItem>
+                                        <asp:MenuItem Text="Cập nhật bậc lương" Value="New Item"></asp:MenuItem>
+                                    </asp:MenuItem>
+                                    <asp:MenuItem Text="Giới thiệu" Value="GT"></asp:MenuItem>
+                                </Items>
+                            </asp:Menu>
+                        </li>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div id="body" >
+
+
+        <section class="content-wrapper main-content clear-fix">
+      <table style="width:100%; table-layout:fixed">
+          <tr>
+              <td  style="vertical-align:top; width:15%" >
+                  <div class="lou" style="width:100%; height:435px">
+                 <asp:Menu ID="Menu2" runat="server" RenderingMode="Table" StaticSubMenuIndent="5px" Width="100%">
+                    <Items>
+                        <asp:MenuItem Text="Danh mục" Value="DM" >
+                            <asp:MenuItem NavigateUrl="/nguoidung/p" Text="Cập nhật tài khoản" Value="Capnhattaikhoan"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="/dantoc/p" Text="Cập nhật dân tộc" Value="capnhatdmdantoc"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="/loaihopdong/p" Text="Cập nhật loại hợp đồng" Value="capnhatloaihopdong"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="/phongban/p" Text="Cập nhật phòng ban" Value="capnhatphongban"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="/tongia/p" Text="Cập nhật tôn giáo" Value="capnhattongiao"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="/trinhdo/dh" Text="Cập nhật trình độ" Value="capnhattrinhdo"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="/chucvu/cv" Text="Cập nhật chức vụ" Value="capnhatchucvu"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="/gioitinh/nam" Text="Cập nhật giới tính" Value="capnhatgioitinh"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="Nghiệp vụ" Value="NV">
+                            <asp:MenuItem NavigateUrl="nghiepvu/nhanvien" Text="Hồ sơ nhân viên" Value="hosonhanvien"></asp:MenuItem>
+                            <asp:MenuItem Text="Cập nhật hồ sơ BHXH" Value="New Item"></asp:MenuItem>
+                            <asp:MenuItem Text="Cập nhật thông tin hành chánh" Value="New Item"></asp:MenuItem>
+                            <asp:MenuItem Text="Cập nhật bậc lương" Value="New Item"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="Giới thiệu" Value="GT"></asp:MenuItem>
+                   </Items>
+
+                 </asp:Menu>
+                </div>
+              </td>
+              <td style="vertical-align:top; width:85%">
+                  <asp:ContentPlaceHolder runat="server" ID="FeaturedContent"/>
+                  <asp:ContentPlaceHolder runat="server" ID="MainContent"/> 
+
+              </td>
+
+          </tr>
+      </table>
+        
+        
+
+
+
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+            </div>
+        </div>
+    </footer>
+    </form>
+
+</body>
+
+</html>
